@@ -1,2 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Perform forced LF normalization of .sh files even on Windows
+*.sh text=auto eol=lf
