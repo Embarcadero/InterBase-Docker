@@ -1,5 +1,5 @@
 #!/bin/bash
-if ls -a /opt/interbase/license/.7*.slip 1> /dev/null 2>&1; then
+if ls -a /opt/interbase/license/.[[:digit:]]*.slip 1> /dev/null 2>&1; then
   IB_PROTOCOL=gds_db
   export IB_PROTOCOL
   INTERBASE=/opt/interbase
