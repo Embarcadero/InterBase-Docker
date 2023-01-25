@@ -5,13 +5,13 @@ Dockerfile build for building [Embarcadero InterBase](https://interbase.com/) co
 2. Run `docker build -t ib2020u4 .` where ib2020u4 is the tag name. If you update it, then change it below as well.
 3. First time run:
 ```
-docker run -it -p 3050:3050 --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
+docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
 ```
 This will run the license manager. Setting the target to `/opt/interbase/license` should keep the InterBase binaries ephemeral so that subsequent containers can contain updates.
 
 4. If successfully registered, run the container in the background
 ```
-docker run -d -p 3050:3050 --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
+docker run -d -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
 ```
 
 _This software is Copyright &copy; 2023 by [Embarcadero Technologies, Inc.](https://www.embarcadero.com/)_
