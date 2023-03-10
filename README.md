@@ -1,18 +1,26 @@
 # InterBase-Docker
-Dockerfile build for building [Embarcadero InterBase](https://interbase.com/) containers. You need an InterBase server license to use this.
+Dockerfile build for building [Embarcadero InterBase](https://interbase.com/) containers. The current version installs InterBase 2020 Update 4. You need an InterBase server license to use this.
 
 1. Copy `Dockerfile`, `values.txt`, and `ibstart.sh` into a directory.
 2. Run `docker build -t ib2020u4 .` where ib2020u4 is the tag name. If you update it, then change it below as well.
 3. First time run:
 ```
-docker run -it -p 3050:3050 --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
+docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase docker.io/library/ib2020u4
 ```
-This will run the license manager. Setting the target to `/opt/interbase/license` should keep the InterBase binaries ephemeral so that subsequent containers can contain updates.
+This will run the license manager, storing the license in `/opt/interbase/license`. This keeps the license static, while the InterBase binaries are ephemeral so subsequent containers can contain updates.
 
-4. If successfully registered, run the container in the background
+4. Since we have the container a name, we need to remove it before running it again: `docker container rm interbase`
+
+5. If successfully registered, run the container in the background
 ```
-docker run -d -p 3050:3050 --mount source=iblicense,target=/opt/interbase/license  docker.io/library/ib2020u4
+docker run -d -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase docker.io/library/ib2020u4
 ```
+
+6. When you create a database, store in the path `/opt/interbase` which is mapped to the external _interbase_ volume. This keeps the database files persistent. 
+
+7. In the future you can stop the InterBase container with `docker container stop interbase` and restart it with `docker container start interbase`. You only need to remove it if you are changing the _run_ command that was used to launch it.
+
+---
 
 _This software is Copyright &copy; 2023 by [Embarcadero Technologies, Inc.](https://www.embarcadero.com/)_
 
