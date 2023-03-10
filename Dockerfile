@@ -19,12 +19,12 @@ RUN chmod +x install_linux_x86_64.sh
 RUN sh ./install_linux_x86_64.sh -f values.txt
 
 # Remove Interbase install leftovers
-RUN rm ibinstall.zip
-RUN rm ib_install_linux_x86_64.bin
-RUN rm install_linux_x86_64.sh
-RUN rm install_linux_x86.sh
-RUN rm ib_install_linux_x86.bin
-RUN rm -rf ./setup
+RUN rm ibinstall.zip \
+    rm ib_install_linux_x86_64.bin \
+    rm install_linux_x86_64.sh \
+    rm install_linux_x86.sh \
+    rm ib_install_linux_x86.bin \
+    rm -rf ./setup
 
 # Add start script
 COPY ibstart.sh ./ibstart.sh
