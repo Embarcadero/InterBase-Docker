@@ -1,4 +1,5 @@
-# InterBase-Docker
+# InterBase-Docker! <img src="https://user-images.githubusercontent.com/821930/228645057-cc7e2bad-eac7-4c12-8250-089aa4cf77f1.png" align="right">
+
 Dockerfile build for building [Embarcadero InterBase](https://interbase.com/) containers. The current version installs InterBase 2020 Update 4. You need an InterBase server license to use this.
 
 1. Copy `Dockerfile`, `values.txt`, and `ibstart.sh` into a directory.
