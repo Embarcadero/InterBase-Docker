@@ -3,7 +3,7 @@
 Dockerfile build for building [Embarcadero InterBase](https://interbase.com/) containers. The current version installs InterBase 2020 Update 4. You need an InterBase server license to use this.
 
 1. Copy `Dockerfile`, `values.txt`, and `ibstart.sh` into a directory.
-2. Run `docker build -t ib2020u4 .` where ib2020u4 is the tag name. If you update it, then change it below as well.
+2. Run `docker build -t ib2020u4 .` where **ib2020u4** is the tag name. If you update it, then change it below as well.
 3. First time run:
 ```
 docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase docker.io/library/ib2020u4
