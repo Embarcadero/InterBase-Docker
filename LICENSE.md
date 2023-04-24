@@ -13,6 +13,7 @@ _Applies to:_
 * InterBase 2020 Desktop Edition
 * InterBase 2020 Developer Edition
 * InterBase 2020 ToGo Edition
+* InterBase 2020 Lite Edition
 
 ### 1\. SCOPE
 
@@ -152,7 +153,7 @@ The Software is not fault-tolerant and is not designed, manufactured or intended
 
 ### 24\. THIRD PARTY SOFTWARE
 
-Certain components of the Product use or incorporate third party software programs and/or libraries (but excluding Separately Licensed Code) ("Third Party Software"). Licensee agrees that Licensor's third party licensors and suppliers are intended third party beneficiaries of all terms and conditions of this Agreement intended to protect intellectual property rights in the Product (including the Third Party Software) and limit certain uses thereof. The components listed in the oss\_license\_notice.txt file are considered "Separately Licensed Code". Separately Licensed Code is licensed to Licensee under the terms of the applicable third party license agreement(s) set forth in the oss\_license\_notice.txt file or as provided with the Separately Licensed Code. The terms of such third party license agreement(s) governs Licensee's use of all Separately Licensed Code. LICENSOR DISCLAIMS ANY AND ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS INCLUDING, BUT NOT LIMITED TO, THE WARRANTY OF TITLE, NON-INFRINGEMENT OR INTERFERENCE AND THE IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, WITH RESPECT TO THE SEPARATELY LICENSED CODE; Licensor is not liable to Licensee, and will not defend, indemnify, or hold Licensee harmless for any claims arising from or related to the Separately Licensed Code; and Licensor is not liable for any direct, indirect, incidental, special, exemplary, punitive or consequential damages including, but not limited to, lost data, lost savings, and lost profits, with respect to the Separately Licensed Code.
+Certain components of the Product use or incorporate third party software programs and/or libraries (but excluding Separately Licensed Code) ("Third Party Software"). Licensee agrees that Licensor's third party licensors and suppliers are intended third party beneficiaries of all terms and conditions of this Agreement intended to protect intellectual property rights in the Product (including the Third Party Software) and limit certain uses thereof. The components listed in the oss_license_notice.txt file are considered "Separately Licensed Code". Separately Licensed Code is licensed to Licensee under the terms of the applicable third party license agreement(s) set forth in the oss_license_notice.txt file or as provided with the Separately Licensed Code. The terms of such third party license agreement(s) governs Licensee's use of all Separately Licensed Code. LICENSOR DISCLAIMS ANY AND ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS INCLUDING, BUT NOT LIMITED TO, THE WARRANTY OF TITLE, NON-INFRINGEMENT OR INTERFERENCE AND THE IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, WITH RESPECT TO THE SEPARATELY LICENSED CODE; Licensor is not liable to Licensee, and will not defend, indemnify, or hold Licensee harmless for any claims arising from or related to the Separately Licensed Code; and Licensor is not liable for any direct, indirect, incidental, special, exemplary, punitive or consequential damages including, but not limited to, lost data, lost savings, and lost profits, with respect to the Separately Licensed Code.
 
 ### 25\. EDITION SPECIFIC TERMS
 
@@ -164,7 +165,7 @@ INTERBASE 2020:
 * DESKTOP EDITION
 * DEVELOPER EDITION
 * TOGO EDITION
-
+* LITE EDITION
   
 
 ### 25.1 LIMITED USE RIGHTS FOR OTHER PROGRAMS
@@ -205,11 +206,15 @@ Under the Developer's license, Licensee may install and execute the Product on a
 
 If you have obtained InterBase from a third party as part of the third party application it may contain a call home feature whereby the Software makes an automated one-time connection to the Embarcadero product registration system to record that the license is in use and the underlying operating system.
 
-### 25.9 INTERBASE TOGO EDITION
+### 25.9 INTERBASE LITE EDITION
 
-Under each ToGo Edition license, Licensee may install the ToGo Edition software on a single device and access a single instance of the InterBase ToGo Edition from a single instance of an application running on the same device on which the instance of InterBase ToGo Edition is executing for use by one concurrent user at any one time. InterBase ToGo Edition may only use, on one device, the specific number of CPU cores that are identified in the accompanying documentation for the particular version of InterBase ToGo Edition. Licensee shall provide safeguards to ensure no more than one concurrent user uses the ToGo Edition at any one time. Licensee may not use multiplexing or connection pooling software or hardware to reduce the number of users directly connected to the ToGo Edition software, the number of users installing or using ToGo Edition shall be measured as the number of distinct inputs to the multiplexing or connection pooling front end. Licensee's user may not connect to the ToGo Edition software via an unrestricted-access Internet application.
+Under the InterBase Lite Edition license (“Lite Edition”) included with RAD Studio, Licensee may install the Lite Edition software on any number of mobile and Desktop devices from a single instance of an application built with RAD Studio and  running on the same device on which the instance of Lite  Edition is executing for use by one concurrent user at any one time. The number of users installing or using the Lite Edition shall be measured as the number of distinct inputs to the multiplexing or connection pooling front end. Licensee may not use multiplexing or connection pooling software or hardware to reduce the number of users directly connected to the Lite Edition software. Licensee's user may not connect to the Lite Edition software via an unrestricted-access Internet application.
 
-### 25.10 INTERBASE TOGO TEST DEPLOYMENT LICENSE
+### 25.10 INTERBASE TOGO EDITION
+
+Under each ToGo Edition license, Licensee may install the ToGo Edition software on a single device and access a single instance of the InterBase ToGo Edition from a single instance of an application running on the same device on which the instance of InterBase ToGo Edition is executing for use by one concurrent user at any one time. InterBase ToGo Edition may only use, on one device, the specific number of CPU cores that are identified in the accompanying documentation for the particular version of InterBase ToGo Edition. Licensee shall provide safeguards to ensure no more than one concurrent user uses the ToGo Edition at any one time. Licensee may not use multiplexing or connection pooling software or hardware to reduce the number of users directly connected to the ToGo Edition software, the number of users installing or using ToGo Edition shall be measured as the number of distinct inputs to the multiplexing or connection pooling front end. Licensee's user may not connect to the ToGo Edition software via an unrestricted-access Internet application. The above restriction is not applicable to the extent Licensee acquired the InterBase ToGo Edition through the purchase of the RAD Studio Enterprise or Architect Edition, which includes an InterBase ToGo mobile deployment license (“ToGo License”). To that end, Licensee has the right to distribute the RAD Studio applications including the ToGo License to the supported mobile platforms to unlimited users on unlimited devices.
+
+### 25.11 INTERBASE TOGO TEST DEPLOYMENT LICENSE
 
 Licensee may use the InterBase ToGo Test Deployment license for the purpose of executing the InterBase ToGo Test Deployment software, alone or in conjunction with other programs or systems solely to evaluate the performance or operation of Product or the programs or systems. It may not be used for production purposes. When executing under an InterBase ToGo Test Deployment license, the Product is subject to limitations on the duration for which the Product will execute, as further described in the accompanying documentation and/or README file. Embarcadero may extend the duration at its sole discretion.
 
