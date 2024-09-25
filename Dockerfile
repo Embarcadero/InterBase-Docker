@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:jammy
 
 # Install required packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -yy install --no-install-recommends \
