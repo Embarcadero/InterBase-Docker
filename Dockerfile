@@ -13,7 +13,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -yy install --no-in
 
 # Extract InterBase
 RUN curl -L "${IB_URL}" -k -o ./ibinstall.zip \
-    && unzip ibinstall.zip -d ./install \
+    && unzip ibinstall.zip -d /install \
     && rm -rf ibinstall.zip
 
 # Runtime stage
