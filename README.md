@@ -1,34 +1,110 @@
-# InterBase in Docker <a href="https://www.embarcadero.com/products/interbase"><img src="https://user-images.githubusercontent.com/821930/228645057-cc7e2bad-eac7-4c12-8250-089aa4cf77f1.png" align="right" alt="Embarcadero InterBase"></a>
+# 🚀 Embarcadero InterBase in Docker 🚀  <a href="https://www.embarcadero.com/products/interbase"><img src="https://user-images.githubusercontent.com/821930/228645057-cc7e2bad-eac7-4c12-8250-089aa4cf77f1.png" align="right" alt="Embarcadero InterBase"></a>
 
-Embarcadero InterBase is the winner of Total Telco’s IoT Award for “the most innovative use of data” thanks to its highly scalable patented Change Views technology, which ensures the fastest, simplest and most secure way to track changes to persisted data. Reconnect anytime to get personalized field-level changes for any user/device using standard SQL, and update remote cached data rapidly with small, context-aware deltas!
+**Award-Winning SQL Database**  
+Embarcadero InterBase, winner of Total Telco's IoT Award for **"The Most Innovative Use of Data"**, is a powerful, scalable, and secure relational database. Built for cross-platform applications, it offers ultra-fast performance, multi-dimensional security, and patented **Change Views** technology to track changes in your data, making it ideal for IoT and embedded environments.
 
-InterBase is a full-featured, high performance, ultrafast, encryptable, scalable, relational and embeddable multi-platform SQL database with multi-dimensional data security, disaster recovery and change synchronization for developers who want to embed a low-cost, zero-admin, secure database into their cross-platform connected applications.
+- **Container available on [Docker Hub](https://hub.docker.com/r/radstudio/interbase)**
+- [InterBase Documentation](https://docwiki.embarcadero.com/InterBase/2020/en/Main_Page)
+- Other containers: [PAServer](https://github.com/Embarcadero/paserver-docker), [RAD Server](https://github.com/Embarcadero/pa-radserver-docker), and [RAD Server with InterBase](https://github.com/Embarcadero/pa-radserver-ib-docker)
 
-This [image is available on DockerHub](https://hub.docker.com/r/radstudio/interbase) for easy download and use.
+## ⚡ Key Features  
+- **Blazing Fast**: Ultrafast database engine with minimal overhead.
+- **Multi-Platform**: Embeddable across Windows, Linux, macOS, iOS, and Android.
+- **Zero Admin**: Low maintenance, fully scalable, and easily embeddable in applications.
+- **Patented Change Views**: Track changes with unparalleled speed and security.
+- **Multi-Dimensional Security**: Full encryption and security layers for maximum data protection.
+- **Disaster Recovery & Sync**: Robust mechanisms for data recovery and synchronization.
 
-## Instructions
+---
 
-Dockerfile build for building [Embarcadero InterBase](https://www.embarcadero.com/products/interbase/) containers. The current version installs InterBase 2020 Update 4. You need an InterBase server license to use this.
+## 🛠️ How to Use InterBase with Docker
 
-1. Copy `Dockerfile`, `values.txt`, and `ibstart.sh` into a directory.
-2. Run `docker build -t ib2020u4 .` where **ib2020u4** is the tag name. If you update it, then change it below as well.
-3. First time run:
+Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
+
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/your-repo/interbase.git
+   cd interbase
+   ```
+
+2. **Run the Setup Script**  
+   Use the `run.sh` script to spin up your InterBase instance with Docker.
+   ```bash
+   ./run.sh
+   ```
+   This script automates the entire setup, ensuring everything is configured properly!
+
+2. **Run using Docker Run - not necessary to clone the repository**  
+   Use the image available on `DockerHub` and run your container directly with `Docker Run`.
+   ```bash
+   docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase radstudio/interbase:latest
+   ```
+---
+
+## 🔑 Registration: Quick & Simple  
+
+The first time you run InterBase, you’ll need to register. Here's how to do it effortlessly:
+
+1. Run the container and wait for the console to display registration options.
+2. Select **Option 2** for direct registration (the easiest method).
+3. Enter your **serial number** and **account details**.
+4. Your license will be saved at `/opt/interbase/license` by default.
+
+🔒 **Your license is securely stored, so you only need to do this once!** 
+
+---
+
+## 💻 Usage Guide: Running InterBase with Docker
+
+You can manage your InterBase instance using the `run.sh` script with these helpful options:
+
+- **--name**: Assign a name to the container (default: `interbase`).
+- **--port**: Specify a port for InterBase to listen on (default: `3050`).
+- **--version**: Select the desired version (e.g., `latest`, `2020.4`).
+- **--help**: Display usage help for the script.
+
+Here’s an example command:
+```bash
+./run.sh --Name=my_database --Port=3050 --Version=latest
 ```
-docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase docker.io/library/ib2020u4
+
+---
+
+## 🗃️ Volumes: Data Persistence Done Right
+
+We use **Docker Volumes** to persist your databases by default, which offers several advantages:
+
+- **Improved Performance**: Volumes operate at higher speeds compared to binds as they are managed natively by Docker.
+- **Reduced Failure Risk**: Unlike binds, volumes are less prone to filesystem failures, ensuring your data remains safe and accessible.
+- **No Manual Setup Needed**: Volumes are automatically handled by Docker, so you don’t need to worry about configuration issues or latency concerns.
+
+✨ With volumes, your data is always secure, fast, and ready to go!
+
+---
+
+## 🐳 For Power Users: Using Docker Run Directly
+
+For users who prefer to dive straight into the command line, you can skip the `run.sh` script and manage the container directly with `docker run`.
+
+Here’s a basic example:
+```bash
+docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase radstudio/interbase:latest
 ```
-This will run the license manager, storing the license in `/opt/interbase/license`. This keeps the license static, while the InterBase binaries are ephemeral so subsequent containers can contain updates.
 
-4. Since we gave the container a name, we need to remove it before running it again: `docker container rm interbase`
+You can add extra flags or adjust settings as needed for your environment.
 
-5. If successfully registered, run the container in the background
+### 🛠️ Command Structure
+
+The basic structure of the command to run the InterBase Docker container is as follows:
+
+```bash
+docker run [OPTIONS] radstudio/interbase:[VERSION]
 ```
-docker run -d -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase docker.io/library/ib2020u4
-```
 
-6. When you create a database, store it on the path `/opt/interbase` which is mapped to the external _interbase_ volume. This keeps the database files persistent. 
+---
 
-7. In the future you can stop the InterBase container with `docker container stop interbase` and restart it with `docker container start interbase`. You only need to remove it if you are changing the _run_ command that was used to launch it.
-
+## 🚀 Start Building with Embarcadero InterBase Today!  
+InterBase offers unmatched performance, security, and ease of use for developers looking to embed a robust SQL database into their cross-platform applications.
 ---
 
 _This software is Copyright &copy; 2023 by [Embarcadero Technologies, Inc.](https://www.embarcadero.com/)_
