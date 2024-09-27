@@ -27,8 +27,8 @@ Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
    cd interbase
    ```
 
-2. **Run the Setup Script**  
-   Use the `run.sh` script to spin up your InterBase instance with Docker.
+2. **Run the [`run.sh`] Script**  
+   Use the `run.sh` script to spin up your InterBase instance with Docker with your preferred options. Below are the instructions to utilize this script effectively.
    ```bash
    ./run.sh
    ```
