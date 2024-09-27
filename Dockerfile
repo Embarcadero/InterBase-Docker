@@ -22,6 +22,7 @@ FROM ubuntu:jammy
 # Copy InterBase installer, the ref. file with default values for instalation, start script
 COPY --from=0 /install /install
 COPY values.txt /install/values.txt
+COPY iblibraries.sh /install/iblibraries.sh
 COPY ibstart.sh /interbase/ibstart.sh
 
 # Configure /etc/services
@@ -33,6 +34,8 @@ WORKDIR /install
 # Run InterBase installer
 RUN chmod +x ./install_linux_x86_64.sh \
     && ./install_linux_x86_64.sh -f ./values.txt \
+    && chmod +x ./iblibraries.sh \
+    && ./iblibraries.sh \
     && rm -rf ../install
 
 WORKDIR /interbase
