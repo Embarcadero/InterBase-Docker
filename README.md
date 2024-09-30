@@ -61,7 +61,7 @@ You can manage your InterBase instance using the `run.sh` script with these help
 - **--name**: Assign a name to the container (default: `interbase`).
 - **--port**: Specify a port for InterBase to listen on (default: `3050`).
 - **--version**: Select the desired version (e.g., `latest`, `2020.4`).
-- **[detached]**: Use `-d`to run the container in detached mode (in the background).
+- **--detach**: To run the container in detached mode (in the background).
 - **--help**: Display usage help for the script.
 
 Here’s an example command:
