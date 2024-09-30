@@ -30,7 +30,7 @@ Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
 2. **Run the [`run.sh`] Script**  
    Use the `run.sh` script to spin up your InterBase instance with Docker with your preferred options. Below are the instructions to utilize this script effectively.
    ```bash
-   ./run.sh --Name=my_database --Port=3050 --Version=latest
+   ./run.sh -d --Name my_database --Port 3050 --Version latest
    ```
    This script automates the entire setup, ensuring everything is configured properly!
 
@@ -61,11 +61,12 @@ You can manage your InterBase instance using the `run.sh` script with these help
 - **--name**: Assign a name to the container (default: `interbase`).
 - **--port**: Specify a port for InterBase to listen on (default: `3050`).
 - **--version**: Select the desired version (e.g., `latest`, `2020.4`).
+- **[detached]**: Use `-d`to run the container in detached mode (in the background).
 - **--help**: Display usage help for the script.
 
 Here’s an example command:
 ```bash
-./run.sh --Name=my_database --Port=3050 --Version=latest
+./run.sh -d --Name my_database --Port 3050 --Version latest
 ```
 
 ---
