@@ -1,7 +1,7 @@
 # Build Stage
 FROM ubuntu:jammy
 
-ENV IB_URL=https://altd.embarcadero.com/download/interbase/2020/Update4/InterBase_2020_Linux.zip
+ENV IB_URL=https://altd.embarcadero.com/download/interbase/2020/Update6/InterBase_2020_Linux.zip
 
 # Install required packages
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -yy install --no-install-recommends \
