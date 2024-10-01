@@ -101,6 +101,20 @@ The basic structure of the command to run the InterBase Docker container is as f
 ```bash
 docker run [OPTIONS] radstudio/interbase:[VERSION]
 ```
+
+### 🏗️ Building Your Custom Image
+
+After customizing your Dockerfile, you can build your Docker image using the docker build command.
+
+```bash
+docker build -t my-custom-interbase:latest .
+```
+
+### 💡 Tips
+
+- This repository provides a [`build.sh`] script that can be used as a template for simplifying custom builds.
+- Currently, this image is only compatible with `linux/amd64`. To avoid potential problems in arm setups, build the image with the arg `--platform linux/amd64`
+
 ---
 
 ## 🚀 Start Building with Embarcadero InterBase Today!  
