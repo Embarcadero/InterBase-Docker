@@ -34,7 +34,7 @@ Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
    ```
    This script automates the entire setup, ensuring everything is configured properly!
 
-2. **Run using Docker Run - not necessary to clone the repository**  
+3. **Run using Docker Run - not necessary to clone the repository**  
    Use the image available on `DockerHub` and run your container directly with `Docker Run`.
    ```bash
    docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase radstudio/interbase:latest
@@ -101,7 +101,6 @@ The basic structure of the command to run the InterBase Docker container is as f
 ```bash
 docker run [OPTIONS] radstudio/interbase:[VERSION]
 ```
-
 ---
 
 ## 🚀 Start Building with Embarcadero InterBase Today!  
