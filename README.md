@@ -23,8 +23,8 @@ Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/your-repo/interbase.git
-   cd interbase
+   git clone https://github.com/Embarcadero/InterBase-Docker.git
+   cd InterBase-Docker
    ```
 
 2. **Run the [`run.sh`] Script**  
