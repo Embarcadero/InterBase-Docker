@@ -106,11 +106,10 @@ docker run -e IB_USER=LUCAS \
 ### 🗄️ Creating a New Database
 You can create a new InterBase database during container startup using the following variables:
 
+- **IB_USER** and **IB_PASSWORD**: The user credentials (necessary to create the database).
 - **IB_DATABASE**: The name of the new database (e.g., `hellodocker.gdb`).
-- **IB_USER** and **IB_PASSWORD**: The user credentials to associate with the database.
-- **IB_SYSDBA_PASSWORD**: The SYSDBA password (needed to create the database).
 - **IB_DATABASE_PAGE_SIZE**: Optional, to specify the page size of the new database (default is 4096).
-- **IB_DATABASE_DEFAULT_CHARSET**: Optional, to specify the default charset for the database (e.g., `UTF8`).
+- **IB_DATABASE_DEFAULT_CHARSET**: Optional, to specify the default charset for the new database (e.g., `UTF8`).
 
 Here’s an example command:
 ```bash
