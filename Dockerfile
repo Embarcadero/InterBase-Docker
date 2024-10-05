@@ -19,11 +19,18 @@ RUN curl -L "${IB_URL}" -k -o ./ibinstall.zip \
 # Runtime stage
 FROM ubuntu:jammy
 
+ENV PREFIX=/opt/interbase
+ENV LICENSEPATH=/opt/interbase/license
+ENV VOLUME=/interbase
+ENV DBPATH=/interbase/database
+
+VOLUME ["/interbase"]
+
 # Copy InterBase installer, the ref. file with default values for instalation, start script
 COPY --from=0 /install /install
 COPY values.txt /install/values.txt
 COPY iblibraries.sh /install/iblibraries.sh
-COPY ibstart.sh /interbase/ibstart.sh
+COPY entrypoint.sh ${PREFIX}/entrypoint.sh
 
 # Configure /etc/services
 RUN echo "gds-db 3050/tcp gds_db # InterBase server" >> /etc/services \
@@ -36,15 +43,15 @@ RUN chmod +x ./install_linux_x86_64.sh \
     && ./install_linux_x86_64.sh -f ./values.txt \
     && chmod +x ./iblibraries.sh \
     && ./iblibraries.sh \
-    && rm -rf ../install
+    && rm -rf ../install \
+    && chmod +x ${PREFIX}/entrypoint.sh
 
 WORKDIR /interbase
-
-# Gives the InterBase start script execute permission
-RUN chmod +x ./ibstart.sh
 
 # 3050 is standard InterBase port
 EXPOSE 3050
 
 # Execute InterBase start script
-ENTRYPOINT ["./ibstart.sh"]
+ENTRYPOINT [ "/opt/interbase/entrypoint.sh" ]
+
+CMD ["interbase"]

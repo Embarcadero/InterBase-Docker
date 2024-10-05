@@ -50,7 +50,9 @@ fi
 
 docker run $DETACH_ARG \
     -p $PORT:3050 \
+    --rm \
     --name $NAME \
-    --mount type=volume,source=iblicense,target=/opt/interbase/license \
     --mount type=volume,source=interbase,target=/opt/interbase \
+    --mount type=volume,source=iblicense,target=/opt/interbase/license \
+    --mount type=volume,source=ibdata,target=/interbase \
     radstudio/interbase:$VERSION
