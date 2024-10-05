@@ -116,7 +116,6 @@ Here’s an example command:
 docker run -e IB_USER=LUCAS \
            -e IB_PASSWORD=123 \
            -e IB_DATABASE=hellodocker.gdb \
-           -e IB_SYSDBA_PASSWORD=masterkey \
            radstudio/interbase:latest
 ```
 
