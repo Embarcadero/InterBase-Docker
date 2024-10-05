@@ -71,6 +71,119 @@ Here’s an example command:
 
 ---
 
+## 🔐 Managing InterBase: Passwords, Users, and Databases
+
+With the new features, you can easily manage InterBase's SYSDBA password, create users, and set up new databases using environment variables or secrets.
+
+### 🔄 Updating the SYSDBA Password
+You can update the SYSDBA password directly by providing the following variables:
+
+- **IB_SYSDBA_OLD_PASSWORD**: The current SYSDBA password.
+- **IB_SYSDBA_NEW_PASSWORD**: The new password you wish to set.
+
+Here’s an example:
+```bash
+docker run -e IB_SYSDBA_OLD_PASSWORD=masterkey \
+           -e IB_SYSDBA_NEW_PASSWORD=newpassword \
+           radstudio/interbase:latest
+```
+
+### 👤 Creating a New User
+To create a new user in InterBase, use the following environment variables:
+
+- **IB_USER**: The name of the new user.
+- **IB_PASSWORD**: The password for the new user.
+- **IB_SYSDBA_PASSWORD**: The SYSDBA password (required to create users).
+
+Example usage:
+```bash
+docker run -e IB_USER=LUCAS \
+           -e IB_PASSWORD=123 \
+           -e IB_SYSDBA_PASSWORD=masterkey \
+           radstudio/interbase:latest
+```
+
+### 🗄️ Creating a New Database
+You can create a new InterBase database during container startup using the following variables:
+
+- **IB_DATABASE**: The name of the new database (e.g., `hellodocker.gdb`).
+- **IB_USER** and **IB_PASSWORD**: The user credentials to associate with the database.
+- **IB_SYSDBA_PASSWORD**: The SYSDBA password (needed to create the database).
+- **IB_DATABASE_PAGE_SIZE**: Optional, to specify the page size of the new database (default is 4096).
+- **IB_DATABASE_DEFAULT_CHARSET**: Optional, to specify the default charset for the database (e.g., `UTF8`).
+
+Here’s an example command:
+```bash
+docker run -e IB_USER=LUCAS \
+           -e IB_PASSWORD=123 \
+           -e IB_DATABASE=hellodocker.gdb \
+           -e IB_SYSDBA_PASSWORD=masterkey \
+           radstudio/interbase:latest
+```
+
+### 🔑 Using Secrets for Security
+For improved security, you can use **Docker Secrets** instead of environment variables to store sensitive information like passwords.
+
+To use secrets, create a file with the same name as the environment variable, but with the `_FILE` suffix. For example:
+- `IB_PASSWORD_FILE` would be the file containing the password.
+- `IB_SYSDBA_PASSWORD_FILE` for the SYSDBA password.
+
+Example structure:
+```bash
+docker run -e IB_USER=LUCAS \
+           -e IB_PASSWORD_FILE=/run/secrets/IB_PASSWORD \
+           -e IB_SYSDBA_PASSWORD_FILE=/run/secrets/IB_SYSDBA_PASSWORD \
+           radstudio/interbase:latest
+```
+
+---
+
+## 🐳 Example: Running with Docker
+
+To start your InterBase server instance and create a new user and database, use this simple command:
+
+```bash
+docker run -p 3050:3050 \
+           -e IB_USER=LUCAS \
+           -e IB_PASSWORD=123 \
+           -e IB_DATABASE=hellodocker.gdb \
+           -e IB_SYSDBA_PASSWORD=masterkey \
+           --rm \
+           --name interbase \
+           --mount type=volume,source=interbase,target=/opt/interbase \
+           --mount type=volume,source=iblicense,target=/opt/interbase/license \
+           --mount type=volume,source=ibdata,target=/interbase \
+           radstudio/interbase:latest
+```
+
+---
+
+## 📋 Example: Running with Docker Compose
+
+Alternatively, you can define your setup using **Docker Compose**:
+
+```yaml
+services:
+  interbase:
+    image: ghcr.io/radstudio/interbase
+    restart: always
+    environment:
+      - IB_USER=LUCAS
+      - IB_PASSWORD=123
+      - IB_DATABASE=hellodocker.gdb
+      - IB_SYSDBA_PASSWORD=masterkey
+    volumes:
+      - ./interbase:/opt/interbase
+      - ./iblicense:/opt/interbase/license
+      - ./ibdata:/interbase
+```
+
+---
+
+Now your InterBase setup is complete with full control over users, passwords, and databases! You can either pass the variables directly as environment variables or secure them using Docker secrets for extra safety.
+
+---
+
 ## 🗃️ Volumes: Data Persistence Done Right
 
 We use **Docker Volumes** to persist your databases by default, which offers several advantages:
