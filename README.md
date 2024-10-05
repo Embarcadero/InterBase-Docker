@@ -165,17 +165,28 @@ Alternatively, you can define your setup using **Docker Compose**:
 ```yaml
 services:
   interbase:
-    image: ghcr.io/radstudio/interbase
-    restart: always
+    image: "radstudio/interbase:latest"
+    container_name: interbase
+    restart: "no"
+    ports:
+      - "3050:3050"
     environment:
       - IB_USER=LUCAS
       - IB_PASSWORD=123
       - IB_DATABASE=hellodocker.gdb
       - IB_SYSDBA_PASSWORD=masterkey
     volumes:
-      - ./interbase:/opt/interbase
-      - ./iblicense:/opt/interbase/license
-      - ./ibdata:/interbase
+      - interbase:/opt/interbase
+      - iblicense:/opt/interbase/license
+      - ibdata:/interbase
+
+volumes:
+  interbase:
+    name: interbase
+  iblicense:
+    name: iblicense
+  ibdata:
+    name: ibdata
 ```
 
 ---
