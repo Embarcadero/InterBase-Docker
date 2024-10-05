@@ -189,6 +189,12 @@ volumes:
     name: ibdata
 ```
 
+*Note*: Running Docker compose in interactive mode for InterBase registration:
+
+```bash
+docker compose run --rm interbase
+```
+
 ---
 
 Now your InterBase setup is complete with full control over users, passwords, and databases! You can either pass the variables directly as environment variables or secure them using Docker secrets for extra safety.
