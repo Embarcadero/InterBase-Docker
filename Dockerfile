@@ -1,5 +1,5 @@
 # Build Stage
-FROM ubuntu:jammy
+FROM ubuntu:jammy AS builder
 
 ENV IB_URL=https://altd.embarcadero.com/download/interbase/2020/Update6/InterBase_2020_Linux.zip
 
@@ -27,7 +27,7 @@ ENV DBPATH=/interbase/database
 VOLUME ["/interbase"]
 
 # Copy InterBase installer, the ref. file with default values for instalation, start script
-COPY --from=0 /install /install
+COPY --from=builder /install /install
 COPY values.txt /install/values.txt
 COPY iblibraries.sh /install/iblibraries.sh
 COPY entrypoint.sh ${PREFIX}/entrypoint.sh

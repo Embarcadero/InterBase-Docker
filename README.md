@@ -1,13 +1,14 @@
-# 🚀 Embarcadero InterBase in Docker 🚀  <a href="https://www.embarcadero.com/products/interbase"><img src="https://user-images.githubusercontent.com/821930/228645057-cc7e2bad-eac7-4c12-8250-089aa4cf77f1.png" align="right" alt="Embarcadero InterBase"></a>
+# 🚀 Embarcadero InterBase in Docker 🚀 <a href="https://www.embarcadero.com/products/interbase"><img src=".github/images/ib-logo.png" align="right" alt="Embarcadero InterBase"></a>
 
-**Award-Winning SQL Database**  
+**Award-Winning SQL Database**
 Embarcadero InterBase, winner of Total Telco's IoT Award for **"The Most Innovative Use of Data"**, is a powerful, scalable, and secure relational database. Built for cross-platform applications, it offers ultra-fast performance, multi-dimensional security, and patented **Change Views** technology to track changes in your data, making it ideal for IoT and embedded environments.
 
 - **Container available on [Docker Hub](https://hub.docker.com/r/radstudio/interbase)**
 - [InterBase Documentation](https://docwiki.embarcadero.com/InterBase/2020/en/Main_Page)
 - Other containers: [PAServer](https://github.com/Embarcadero/paserver-docker), [RAD Server](https://github.com/Embarcadero/pa-radserver-docker), and [RAD Server with InterBase](https://github.com/Embarcadero/pa-radserver-ib-docker)
 
-## ⚡ Key Features  
+## ⚡ Key Features
+
 - **Blazing Fast**: Ultrafast database engine with minimal overhead.
 - **Multi-Platform**: Embeddable across Windows, Linux, macOS, iOS, and Android.
 - **Zero Admin**: Low maintenance, fully scalable, and easily embeddable in applications.
@@ -21,27 +22,31 @@ Embarcadero InterBase, winner of Total Telco's IoT Award for **"The Most Innovat
 
 Setting up InterBase with Docker is a breeze! 🐳 Just follow these steps:
 
-1. **Clone the Repository**  
+1. **Clone the Repository**
+
    ```bash
    git clone https://github.com/Embarcadero/InterBase-Docker.git
    cd InterBase-Docker
    ```
 
-2. **Run the [`run.sh`] Script**  
+2. **Run the [`run.sh`] Script**
    Use the `run.sh` script to spin up your InterBase instance with Docker with your preferred options. Below are the instructions to utilize this script effectively.
+
    ```bash
    ./run.sh -d --name my_database --port 3050 --version latest
    ```
+
    This script automates the entire setup, ensuring everything is configured properly!
 
-3. **Run using Docker Run - not necessary to clone the repository**  
+3. **Run using Docker Run - not necessary to clone the repository**
    Use the image available on `DockerHub` and run your container directly with `Docker Run`.
    ```bash
    docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase radstudio/interbase:latest
    ```
+
 ---
 
-## 🔑 Registration: Quick & Simple  
+## 🔑 Registration: Quick & Simple
 
 The first time you run InterBase, you’ll need to register. Here's how to do it effortlessly:
 
@@ -50,7 +55,7 @@ The first time you run InterBase, you’ll need to register. Here's how to do it
 3. Enter your **serial number** and **account details**.
 4. Your license will be saved at `/opt/interbase/license` by default.
 
-🔒 **Your license is securely stored, so you only need to do this once!** 
+🔒 **Your license is securely stored, so you only need to do this once!**
 
 ---
 
@@ -65,6 +70,7 @@ You can manage your InterBase instance using the `run.sh` script with these help
 - **--help**: Display usage help for the script.
 
 Here’s an example command:
+
 ```bash
 ./run.sh -d --name my_database --port 3050 --version latest
 ```
@@ -76,12 +82,14 @@ Here’s an example command:
 With the new features, you can easily manage InterBase's SYSDBA password, create users, and set up new databases using environment variables or secrets.
 
 ### 🔄 Updating the SYSDBA Password
+
 You can update the SYSDBA password directly by providing the following variables:
 
 - **IB_SYSDBA_OLD_PASSWORD**: The current SYSDBA password.
 - **IB_SYSDBA_NEW_PASSWORD**: The new password you wish to set.
 
 Here’s an example:
+
 ```bash
 docker run -e IB_SYSDBA_OLD_PASSWORD=masterkey \
            -e IB_SYSDBA_NEW_PASSWORD=newpassword \
@@ -89,6 +97,7 @@ docker run -e IB_SYSDBA_OLD_PASSWORD=masterkey \
 ```
 
 ### 👤 Creating a New User
+
 To create a new user in InterBase, use the following environment variables:
 
 - **IB_USER**: The name of the new user.
@@ -96,6 +105,7 @@ To create a new user in InterBase, use the following environment variables:
 - **IB_SYSDBA_PASSWORD**: The SYSDBA password (required to create users).
 
 Example usage:
+
 ```bash
 docker run -e IB_USER=LUCAS \
            -e IB_PASSWORD=123 \
@@ -104,6 +114,7 @@ docker run -e IB_USER=LUCAS \
 ```
 
 ### 🗄️ Creating a New Database
+
 You can create a new InterBase database during container startup using the following variables:
 
 - **IB_USER** and **IB_PASSWORD**: The user credentials (necessary to create the database).
@@ -112,6 +123,7 @@ You can create a new InterBase database during container startup using the follo
 - **IB_DATABASE_DEFAULT_CHARSET**: Optional, to specify the default charset for the new database (e.g., `UTF8`).
 
 Here’s an example command:
+
 ```bash
 docker run -e IB_USER=LUCAS \
            -e IB_PASSWORD=123 \
@@ -120,13 +132,16 @@ docker run -e IB_USER=LUCAS \
 ```
 
 ### 🔑 Using Secrets for Security
+
 For improved security, you can use **Docker Secrets** instead of environment variables to store sensitive information like passwords.
 
 To use secrets, create a file with the same name as the environment variable, but with the `_FILE` suffix. For example:
+
 - `IB_PASSWORD_FILE` would be the file containing the password.
 - `IB_SYSDBA_PASSWORD_FILE` for the SYSDBA password.
 
 Example structure:
+
 ```bash
 docker run -e IB_USER=LUCAS \
            -e IB_PASSWORD_FILE=/run/secrets/IB_PASSWORD \
@@ -163,11 +178,11 @@ Alternatively, you can define your setup using **Docker Compose**:
 ```yaml
 services:
   interbase:
-    image: "radstudio/interbase:latest"
+    image: 'radstudio/interbase:latest'
     container_name: interbase
-    restart: "no"
+    restart: 'no'
     ports:
-      - "3050:3050"
+      - '3050:3050'
     environment:
       - IB_USER=LUCAS
       - IB_PASSWORD=123
@@ -187,7 +202,7 @@ volumes:
     name: ibdata
 ```
 
-*Note*: Running Docker compose in interactive mode for InterBase registration:
+_Note_: Running Docker compose in interactive mode for InterBase registration:
 
 ```bash
 docker compose run --rm interbase
@@ -216,6 +231,7 @@ We use **Docker Volumes** to persist your databases by default, which offers sev
 For users who prefer to dive straight into the command line, you can skip the `run.sh` script and manage the container directly with `docker run`.
 
 Here’s a basic example:
+
 ```bash
 docker run -it -p 3050:3050 --name interbase --mount source=iblicense,target=/opt/interbase/license --mount source=interbase,target=/opt/interbase radstudio/interbase:latest
 ```
@@ -245,13 +261,13 @@ docker build -t my-custom-interbase:latest .
 
 ---
 
-## 🚀 Start Building with Embarcadero InterBase Today!  
-InterBase offers unmatched performance, security, and ease of use for developers looking to embed a robust SQL database into their cross-platform applications.
----
+## 🚀 Start Building with Embarcadero InterBase Today!
 
-_This software is Copyright &copy; 2023 by [Embarcadero Technologies, Inc.](https://www.embarcadero.com/)_
+## InterBase offers unmatched performance, security, and ease of use for developers looking to embed a robust SQL database into their cross-platform applications.
+
+_This software is Copyright &copy; 2024 by [Embarcadero Technologies, Inc.](https://www.embarcadero.com/)_
 
 _You may only use this software if you are an authorized licensee of Embarcadero [InterBase](https://www.embarcadero.com/products/interbase/). See the latest [software license agreement](https://www.embarcadero.com/products/interbase/interbase-eula) for updates or changes._
 
-![Embarcadero(Black-100px)](https://user-images.githubusercontent.com/821930/211648635-c0db6930-120c-4456-a7ea-dc7612f01451.png#gh-light-mode-only)
-![Embarcadero(White-100px)](https://user-images.githubusercontent.com/821930/211649057-7f1f1f07-a79f-44d4-8fc1-87c819386ec6.png#gh-dark-mode-only)
+![Embarcadero(Black-100px)](.github/images/embt-logo-black.png#gh-light-mode-only)
+![Embarcadero(White-100px)](.github/images/embt-logo-white.png#gh-dark-mode-only)
