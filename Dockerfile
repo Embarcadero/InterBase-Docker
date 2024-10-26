@@ -23,6 +23,7 @@ ENV PREFIX=/opt/interbase
 ENV LICENSEPATH=/opt/interbase/license
 ENV VOLUME=/interbase
 ENV DBPATH=/interbase/database
+ENV BKPPATH=/interbase/restore
 
 VOLUME ["/interbase"]
 
@@ -33,7 +34,7 @@ COPY iblibraries.sh /install/iblibraries.sh
 COPY entrypoint.sh ${PREFIX}/entrypoint.sh
 
 # Configure /etc/services
-RUN echo "gds-db 3050/tcp gds_db # InterBase server" >> /etc/services \
+RUN echo "gds_db 3050/tcp gds_db # InterBase server" >> /etc/services \
     echo "gds_db 3050/tcp #InterBase Server" >> /etc/services
 
 WORKDIR /install

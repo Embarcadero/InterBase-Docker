@@ -89,10 +89,43 @@ EOL
     fi
 }
 
+restoreBackups() {
+
+    readVar 'RESTORE_USER'
+    readVar 'RESTORE_PASSWORD'
+
+    if [ -n "${RESTORE_USER}" ] && [ -n "${RESTORE_PASSWORD}" ]; then
+        (
+        shopt -s nullglob
+        set +e
+
+        for ibk in ${BKPPATH}/*.ibk; do
+            basename="$(basename -- $ibk)"
+            fname="${basename%.*}"
+            (
+            if [ ! -f "${DBPATH}/${fname}.ib" ]; then
+
+                if [ -f "${BKPPATH}/${fname}.env" ]; then
+                    . "${BKPPATH}/${fname}.env"
+                fi
+
+                echo -n "Restoring '$ibk' "
+                "${PREFIX}/bin/gbak" -c -user "${RESTORE_USER}" -password "${RESTORE_PASSWORD}" "$ibk" "${DBPATH}/${fname}.ib"
+                echo "to '${DBPATH}/${fname}.ib'"
+            fi
+            )
+        done
+
+        set -e
+        )
+    fi
+}
+
 interbaseSetup() {   
     sysdbaUpdate
     createUser
-    createDataBase   
+    createDataBase
+    restoreBackups
 }
 
 sigintHandler() {
@@ -129,7 +162,6 @@ if [[ "$1" == "interbase" ]]; then
 
         startServer
         interbaseSetup
-        #restoreBackups        
         waitFor
     else
         # Run registration
