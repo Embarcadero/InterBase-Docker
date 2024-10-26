@@ -32,6 +32,7 @@ COPY --from=builder /install /install
 COPY values.txt /install/values.txt
 COPY iblibraries.sh /install/iblibraries.sh
 COPY entrypoint.sh ${PREFIX}/entrypoint.sh
+COPY healthcheck.sh ${PREFIX}/healthcheck.sh
 
 # Configure /etc/services
 RUN echo "gds_db 3050/tcp gds_db # InterBase server" >> /etc/services \
@@ -45,12 +46,16 @@ RUN chmod +x ./install_linux_x86_64.sh \
     && chmod +x ./iblibraries.sh \
     && ./iblibraries.sh \
     && rm -rf ../install \
-    && chmod +x ${PREFIX}/entrypoint.sh
+    && chmod +x ${PREFIX}/entrypoint.sh \
+    && chmod +x ${PREFIX}/healthcheck.sh
 
 WORKDIR /interbase
 
 # 3050 is standard InterBase port
 EXPOSE 3050
+
+# Execute a Healthcheck on registered InterBase only
+HEALTHCHECK CMD ${PREFIX}/healthcheck.sh || exit 1
 
 # Execute InterBase start script
 ENTRYPOINT [ "/opt/interbase/entrypoint.sh" ]
