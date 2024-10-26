@@ -113,10 +113,6 @@ docker run -e IB_USER=LUCAS \
            radstudio/interbase:latest
 ```
 
-Here’s a polished addition to your README to highlight the new restore feature:
-
----
-
 ### 🗄️ Creating a New Database
 
 You can create a new InterBase database during container startup using the following variables:
@@ -162,6 +158,8 @@ docker run -e RESTORE_USER=SYSDBA \
 ```
 
 ✨ Now, your backups will be restored and ready to go—no manual intervention needed!
+
+---
 
 ### 🔑 Using Secrets for Security
 
@@ -242,10 +240,6 @@ docker compose run --rm interbase
 
 ---
 
-Now your InterBase setup is complete with full control over users, passwords, and databases! You can either pass the variables directly as environment variables or secure them using Docker secrets for extra safety.
-
----
-
 #### 📝 Naming Convention
 
 While you can use any file extension for your database files, InterBase recommends the following:
@@ -268,6 +262,36 @@ We use **Docker Volumes** to persist your databases by default, which offers sev
 ✨ With volumes, your data is always secure, fast, and ready to go!
 
 ---
+
+## 🏥 Health Check: Keeping Your InterBase Container Healthy!
+
+Ensuring the health of your InterBase Docker container is essential for smooth operations. With our integrated **HEALTHCHECK** feature, you can easily monitor the status of your container and receive alerts if something goes awry. Here’s how it works:
+
+### 🔍 Checking Container Health
+
+When you run your InterBase container, the built-in health check automatically verifies its status at regular intervals. If the container becomes unhealthy, you'll be notified, allowing for quick resolution.
+
+### 📜 Viewing Health Status
+
+To check the health status of your running container, use the following command:
+
+```bash
+docker inspect --format='{{json .State.Health}}' <container_name_or_id>
+```
+
+### 📊 Accessing Logs
+
+If you want to dig deeper and view logs related to the health check, use:
+
+```bash
+docker logs <container_name_or_id>
+```
+
+This command will provide you with detailed output, including any health-related issues that may have occurred, helping you diagnose and resolve problems promptly.
+
+✨ Stay on top of your database’s health with our seamless monitoring! Your InterBase setup is now not only powerful but also reliable. 
+
+--- 
 
 ## 🐳 For Power Users: Using Docker Run Directly
 
