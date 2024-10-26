@@ -113,12 +113,16 @@ docker run -e IB_USER=LUCAS \
            radstudio/interbase:latest
 ```
 
+Here’s a polished addition to your README to highlight the new restore feature:
+
+---
+
 ### 🗄️ Creating a New Database
 
 You can create a new InterBase database during container startup using the following variables:
 
 - **IB_USER** and **IB_PASSWORD**: The user credentials (necessary to create the database).
-- **IB_DATABASE**: The name of the new database (e.g., `hellodocker.gdb`).
+- **IB_DATABASE**: The name of the new database (e.g., `hellodocker.ib`).
 - **IB_DATABASE_PAGE_SIZE**: Optional, to specify the page size of the new database (default is 4096).
 - **IB_DATABASE_DEFAULT_CHARSET**: Optional, to specify the default charset for the new database (e.g., `UTF8`).
 
@@ -127,9 +131,37 @@ Here’s an example command:
 ```bash
 docker run -e IB_USER=LUCAS \
            -e IB_PASSWORD=123 \
-           -e IB_DATABASE=hellodocker.gdb \
+           -e IB_DATABASE=hellodocker.ib \
            radstudio/interbase:latest
 ```
+
+### ♻️ Restoring a Database Backup
+
+Effortlessly restore your InterBase backups! Simply follow these steps to get your `.ibk` files restored as `.ib` databases:
+
+1. **Place `.ibk` Files in the Restore Folder**  
+   Drop your backup files (`.ibk` format) into the `/interbase/restore` folder.
+
+2. **Set Environment Variables**  
+   Specify the user credentials needed for restoration using these environment variables (or Docker secrets for added security):
+
+   - **RESTORE_USER**: The username with permissions for restoration.
+   - **RESTORE_PASSWORD**: The corresponding password.
+
+3. **Automatic Restoration**  
+   On startup, InterBase will automatically detect and restore `.ibk` files, saving them as `.ib` files in the `/interbase/database` folder following InterBase’s default naming convention.
+
+Example usage:
+
+```bash
+docker run -e RESTORE_USER=SYSDBA \
+           -e RESTORE_PASSWORD=masterkey \
+           -v /path/to/restore:/interbase/restore \
+           -v /path/to/database:/interbase/database \
+           radstudio/interbase:latest
+```
+
+✨ Now, your backups will be restored and ready to go—no manual intervention needed!
 
 ### 🔑 Using Secrets for Security
 
@@ -159,7 +191,7 @@ To start your InterBase server instance and create a new user and database, use 
 docker run -p 3050:3050 \
            -e IB_USER=LUCAS \
            -e IB_PASSWORD=123 \
-           -e IB_DATABASE=hellodocker.gdb \
+           -e IB_DATABASE=hellodocker.ib \
            -e IB_SYSDBA_PASSWORD=masterkey \
            --rm \
            --name interbase \
@@ -186,7 +218,7 @@ services:
     environment:
       - IB_USER=LUCAS
       - IB_PASSWORD=123
-      - IB_DATABASE=hellodocker.gdb
+      - IB_DATABASE=hellodocker.ib
       - IB_SYSDBA_PASSWORD=masterkey
     volumes:
       - interbase:/opt/interbase
@@ -211,6 +243,17 @@ docker compose run --rm interbase
 ---
 
 Now your InterBase setup is complete with full control over users, passwords, and databases! You can either pass the variables directly as environment variables or secure them using Docker secrets for extra safety.
+
+---
+
+#### 📝 Naming Convention
+
+While you can use any file extension for your database files, InterBase recommends the following:
+
+- **`.ib`** for database files  
+- **`.ibk`** for backup files  
+
+This standard ensures consistency, especially when managing multiple databases and backups.
 
 ---
 
