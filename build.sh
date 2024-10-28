@@ -4,7 +4,7 @@
 IMAGE_NAME="radstudio/interbase"
 TAG_LATEST="latest"
 TAG_VERSION="2020"
-TAG_NUMERIC="2020.4"
+TAG_NUMERIC="2020.6"
 
 # Build the Docker image with the first tag
 docker build . \
